@@ -1,2 +1,35 @@
-<h1>Let's Get Ready to Rumble</h1>
+
+
+<% 
+ @decks = Deck.find(:all)
+ @cards = Card.find(:all)
+%>
+<html>
+<head>
+<title>The Game of War</title>
+</head>
+<body>
+
+<% if @decks.blank? || @cards.blank? %>
+	<p>There are no cards or decks currently in the system.</p>
+<% else %>
+
+	These are the decks
+	<ul id="decls">
+		<% @decks.each do |deck| %>
+			<li><%= deck.name -%></li>
+		<% end %>
+	</ul>
+	
+	These are the cards
+	<ul>	
+		<% @cards.each do |card| %>
+			<li><%= card.name %></li>
+		<% end %>
+	</ul>		
+		
+<% end %>
+
+</body>
+</html>
 
