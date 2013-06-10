@@ -1,16 +1,4 @@
-<!DOCTYPE html>
 
-<html>
-<head>
-	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
-	<% 
-	 @decks = Deck.find(:all)
-	 @cards = Card.find(:all)
-	%>
-	
-	<title>The Game of War</title>
-</head>
-<body>
 	<h1>Welcome to the game of war</h1>
 	
 	<div>Enter your call sign</div>
@@ -24,7 +12,10 @@
 	
 	
 	<!--
-	<% if @decks.blank? || @cards.blank? %>
+	<% 
+	 @decks = Deck.find(:all)
+	 @cards = Card.find(:all)
+	 if @decks.blank? || @cards.blank? %>
 		<p>There are no cards or decks currently in the system.</p>
 	<% else %>
 	
@@ -44,6 +35,5 @@
 			
 	<% end %>
 	-->
-</body>
-</html>
+
 
