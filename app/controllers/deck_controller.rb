@@ -12,7 +12,7 @@ class DeckController < ApplicationController
 		@playerDeck = @deck.to(25)
 		@computerDeck = @deck.from(26)
 		
-		render 'home/battle'
+		render :action => '/home/battle'
 	end
 
 

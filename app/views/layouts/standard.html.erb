@@ -7,13 +7,15 @@
 
 <%= stylesheet_link_tag "global" %>
 <%= javascript_include_tag "global" %>
+<%= render :partial => "home/deckBuilder" %>
 
 </head>
 
 <body>
 	<div id="header">
 		<h1>WAR!!!</h1>
-		<form action="/deck/new">
+		<form action="/home/battle" method="post">
+			<input type="hidden" name="userName" id="userName" value="<%= @userName%>"/>
 			<button type="submit" >New game</button>
 		</form>
 	</div>
