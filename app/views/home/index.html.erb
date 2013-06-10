@@ -1,35 +1,49 @@
+<!DOCTYPE html>
 
-
-<% 
- @decks = Deck.find(:all)
- @cards = Card.find(:all)
-%>
 <html>
 <head>
-<title>The Game of War</title>
+	<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+	<% 
+	 @decks = Deck.find(:all)
+	 @cards = Card.find(:all)
+	%>
+	
+	<title>The Game of War</title>
 </head>
 <body>
-
-<% if @decks.blank? || @cards.blank? %>
-	<p>There are no cards or decks currently in the system.</p>
-<% else %>
-
-	These are the decks
-	<ul id="decls">
-		<% @decks.each do |deck| %>
-			<li><%= deck.name -%></li>
-		<% end %>
-	</ul>
+	<h1>Welcome to the game of war</h1>
 	
-	These are the cards
-	<ul>	
-		<% @cards.each do |card| %>
-			<li><%= card.name %></li>
-		<% end %>
-	</ul>		
+	<div>Enter your call sign</div>
+	
+	<div>
+		<form action="/home/battle" method="post">
+			<input type="text" name="userName" id="userName" value=""/>
+			<button type="submit" value="">Join the Fight</button>
+		</form>
+	</div>
+	
+	
+	<!--
+	<% if @decks.blank? || @cards.blank? %>
+		<p>There are no cards or decks currently in the system.</p>
+	<% else %>
+	
+		These are the decks
+		<ul id="decls">
+			<% @decks.each do |deck| %>
+				<li><%= deck.name -%></li>
+			<% end %>
+		</ul>
 		
-<% end %>
-
+		These are the cards
+		<ul>	
+			<% @cards.each do |card| %>
+				<li><%= card.name %></li>
+			<% end %>
+		</ul>		
+			
+	<% end %>
+	-->
 </body>
 </html>
 
