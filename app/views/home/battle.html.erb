@@ -6,3 +6,30 @@
 <div id="content">
 	<h1>Hello <%= params[:userName]%></h1>
 </div>
+
+	
+	<% if @playerDeck.blank? %>
+		<p>There are no cards currently in the system.</p>
+	<% else %>
+	
+		These are the player cards
+		<ul>	
+			<%i =1 %>
+			<% @playerDeck.each do |card| %>
+				
+				<li><%=i %> <%= card.name %> of <%= card.suit %></li>
+				<% i=i+1 %>
+			<% end %>
+		</ul>		
+			
+		These are the computer cards
+		<ul>	
+			<%i =1 %>
+			<% @computerDeck.each do |card| %>
+				
+				<li><%=i %> <%= card.name %> of <%= card.suit %></li>
+				<% i=i+1 %>
+			<% end %>
+		</ul>
+	<% end %>
+	
