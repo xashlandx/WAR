@@ -2,7 +2,7 @@
 	<% if @playerDeck && @computerDeck %>
 			
 		var playerDeck = <%= JSON.pretty_generate(@playerDeck.as_json).html_safe%>
-		var computerDeck = <%= JSON.pretty_generate(@computerDeck.as_json).html_safe%>
+		var enemyDeck = <%= JSON.pretty_generate(@computerDeck.as_json).html_safe%>
 		
 	<% end %>
 </Script>
