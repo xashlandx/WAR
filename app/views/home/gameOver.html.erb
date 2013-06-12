@@ -1,0 +1,11 @@
+	<h1>Game Over!!</h1>
+	
+<div>
+	<form action="/home/battle" method="post">
+		<input type="hidden" name="userName" id="userName" value="<%= @userName%>"/>
+		<button type="submit" >Play again</button>
+	</form>
+	<form action="/home/index">
+		<button type="submit" >New Player</button>
+	</form>
+</div>

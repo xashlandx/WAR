@@ -16,22 +16,26 @@ function showCards(playerCard, enemyCard){
 	//show player card
 	var cardImg=document.createElement("img");
 	cardImg.setAttribute('src',  '/assets/'+playerCard.image);
+	cardImg.setAttribute('id', 'playerCard'+ 0);
 	document.getElementById("playerCardSpace").appendChild(cardImg);
 	
 	var playerBlock=document.createElement("div");
 	var playerNode=document.createTextNode(playerCard.name +" of " + playerCard.suit);
 	playerBlock.setAttribute('class', 'cardBlock');
+	playerBlock.setAttribute('id', 'playerCardBlock'+ 0);
 	playerBlock.appendChild(playerNode);
 	document.getElementById("playerCardSpace").appendChild(playerBlock);
 	
 	//show enemy card
 	var cardImg=document.createElement("img");
 	cardImg.setAttribute('src',  '/assets/'+enemyCard.image);
+	cardImg.setAttribute('id', 'enemyCard'+ 0);
 	document.getElementById("enemyCardSpace").appendChild(cardImg);
 	
 	var enemyBlock=document.createElement("div");
 	var enemyNode=document.createTextNode(enemyCard.name +" of " + enemyCard.suit);
 	enemyBlock.setAttribute('class', 'cardBlock');
+	enemyBlock.setAttribute('id', 'enemyCardBlock'+ 0);
 	enemyBlock.appendChild(enemyNode);
 	document.getElementById("enemyCardSpace").appendChild(enemyBlock);
 }
@@ -67,7 +71,7 @@ function compareCards(playerCard, enemyCard){
 		document.getElementById("actionButton").onclick = function () { tieCompare(1) };
 		winnerCheck(4);
 		
-		setTheStage();
+		setTheStage(1);
 	}
 
 }
@@ -80,7 +84,6 @@ function tieCompare(cardsInPlayCount){
 	cardsInPlayCount=cardsInPlayCount+3;
 	cardsHidden=3;
 	winnerCheck(cardsInPlayCount);
-	showTieCards(cardsInPlayCount);
 	
 	//flip and compare the three cards in reverse order
 	flipCard(cardsInPlayCount, 1);
@@ -88,11 +91,13 @@ function tieCompare(cardsInPlayCount){
 
 
 function flipCard(cardsInPlayCount, flipCardCt){
-		//flip(i); visually show card
-		
+				
 		var cardIndex = cardsInPlayCount-flipCardCt;
 		//alert("i = "+cardIndex +" card in play ct = " + cardsInPlayCount + " flipCardCt = " + flipCardCt + " cardshidden " + cardsHidden);
-	
+		
+			//visually show fliped card 
+			showFlipedCard(cardIndex);
+		
 		if (playerDeck[cardIndex].value > enemyDeck[cardIndex].value){
 			//player wins hand
 			document.getElementById("dealerText").innerHTML="You WIN this fight!";
@@ -102,6 +107,7 @@ function flipCard(cardsInPlayCount, flipCardCt){
 			//collect cards in play
 			collectCards(playerDeck, cardsInPlayCount);
 			popCards(cardsInPlayCount);
+			
 		}
 		else if(playerDeck[cardIndex].value < enemyDeck[cardIndex].value){
 			//enemy wins hand
@@ -118,39 +124,31 @@ function flipCard(cardsInPlayCount, flipCardCt){
 			document.getElementById("actionButton").innerHTML="Continue the battle";
 			document.getElementById("actionButton").onclick = function () { flipCard(cardsInPlayCount, flipCardCt+1) };
 		}
+		
 		if (flipCardCt>2){
-			tieCompare(cardsInPlayCount);
+			setTheStage(cardsInPlayCount);
+			document.getElementById("actionButton").onclick = function () { tieCompare(cardsInPlayCount) };
 			//another war
 		}
 }
 
 
 // update the display for a war
-function showTieCards(cardsInPlayCount){
+function showFlipedCard(cardIndex){
 	
-	for(i=1;i<cardsInPlayCount;i++){
-		//show player cards
-		var cardImg=document.createElement("img");
-		cardImg.setAttribute('src',  '/assets/'+playerDeck[i].image);
-		document.getElementById("playerCardSpace").appendChild(cardImg);
+	var playerCardImg = document.getElementById('playerCard'+cardIndex);
+	var playerCardBlock = document.getElementById('playerCardBlock'+cardIndex);
+	var enemyCardImg = document.getElementById('enemyCard'+cardIndex);
+	var enemyCardBlock = document.getElementById('enemyCardBlock'+cardIndex);
 	
-		var playerBlock=document.createElement("div");
-		var playerNode=document.createTextNode(playerDeck[i].name +" of " + playerDeck[i].suit);
-		playerBlock.setAttribute('class', 'cardBlock');
-		playerBlock.appendChild(playerNode);
-		document.getElementById("playerCardSpace").appendChild(playerBlock);
-		
-		//show enemy cards
-		var cardImg=document.createElement("img");
-		cardImg.setAttribute('src',  '/assets/'+enemyDeck[i].image);
-		document.getElementById("enemyCardSpace").appendChild(cardImg);
+	//show player cards
 	
-		var enemyBlock=document.createElement("div");
-		var enemyNode=document.createTextNode(enemyDeck[i].name +" of " + enemyDeck[i].suit);
-		enemyBlock.setAttribute('class', 'cardBlock');
-		enemyBlock.appendChild(enemyNode);
-		document.getElementById("enemyCardSpace").appendChild(enemyBlock);
-	}
+	playerCardImg.src='/assets/'+playerDeck[cardIndex].image;
+	playerCardBlock.innerHTML=playerDeck[cardIndex].name +" of " + playerDeck[cardIndex].suit;
+	
+	//show enemy cards
+	enemyCardImg.src='/assets/'+enemyDeck[cardIndex].image;
+	enemyCardBlock.innerHTML=enemyDeck[cardIndex].name +" of " + enemyDeck[cardIndex].suit;
 
 }
 
@@ -178,8 +176,8 @@ function collectCards(winningDeck, cardsInPlayCount){
 
 //clear the playing field and update the display
 function cleanField(){
-		document.getElementById("playerCardSpace").innerHTML=" ";
-		document.getElementById("enemyCardSpace").innerHTML=" ";
+		document.getElementById("playerCardSpace").innerHTML="";
+		document.getElementById("enemyCardSpace").innerHTML="";
 		document.getElementById("dealerText").innerHTML="Fight";
 		document.getElementById("actionButton").innerHTML="Draw";
 		document.getElementById("actionButton").onclick = function () { playHand() };
@@ -197,39 +195,50 @@ function winnerCheck(check){
 
 	if(playerDeck.length < check){
 		//player loses
-		alert("game over");
+		alert("Game over you Lost!");
+		window.navigate("/home/end");
 	}else if(enemyDeck.length < check){
 		//player wins
-		alert("game over");
+		alert("Game over you Won!");
+		window.navigate("/home/end");
+		
 	}
 
 }
 
 
 //update the view with coverd cards
-function setTheStage(){
+function setTheStage(cardIndex){
+	
+		
 		for(i=0;i<3;i++){
 		//show player cards
 		var cardImg=document.createElement("img");
 		cardImg.setAttribute('src',  '/assets/blue_deck.png');
+		cardImg.setAttribute('id', 'playerCard'+ cardIndex);
 		document.getElementById("playerCardSpace").appendChild(cardImg);
 		
 		var playerBlock=document.createElement("div");
 		var playerNode=document.createTextNode("Mystery Card");
 		playerBlock.setAttribute('class', 'cardBlock');
+		playerBlock.setAttribute('id', 'playerCardBlock'+ cardIndex);
 		playerBlock.appendChild(playerNode);
 		document.getElementById("playerCardSpace").appendChild(playerBlock);
 		
 		//show enemy cards
 		var cardImg=document.createElement("img");
 		cardImg.setAttribute('src',  '/assets/red_deck.png');
+		cardImg.setAttribute('id', 'enemyCard'+ cardIndex);
 		document.getElementById("enemyCardSpace").appendChild(cardImg);
 		
 		var enemyBlock=document.createElement("div");
 		var enemyNode=document.createTextNode("Mystery Card");
 		enemyBlock.setAttribute('class', 'cardBlock');
+		enemyBlock.setAttribute('id', 'enemyCardBlock'+ cardIndex);
 		enemyBlock.appendChild(enemyNode);
 		document.getElementById("enemyCardSpace").appendChild(enemyBlock);
+		
+		cardIndex++;
 		}
 }
 					  

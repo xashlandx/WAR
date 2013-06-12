@@ -1,6 +1,11 @@
 # home controller
 class HomeController < ApplicationController
 	layout 'standard'
+	
+	def index
+		render :view => 'index'
+	end
+	
 	def battle
 		@userName = params[:userName]
 		newGame
@@ -15,10 +20,14 @@ class HomeController < ApplicationController
 		@deck = @deck.shuffle
 		 
 		#deal the deck
-		
 		@playerDeck = @deck.to(25)
 		@computerDeck = @deck.from(26)
-		
+	end
+	
+	def gameOver
+		@userName = params[:userName]
+		render :view => 'gameOver'
+		#render :nothing => true
 	end
 	
 	

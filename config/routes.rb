@@ -64,5 +64,5 @@ WAR::Application.routes.draw do
   #resources :home
   get "/home/battle/" => "home#battle"
   post "/home/battle/" => "home#battle"
-  #post "/home/new/" => "home#newGame"
+  match "/home/end/" => "home#gameOver"
 end
