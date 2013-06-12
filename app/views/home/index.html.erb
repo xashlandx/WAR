@@ -1,16 +1,13 @@
 
-	<h1>Welcome to the game of war</h1>
+<h3>Welcome to the battlefield commander</h3>
 	
+
+<div id="logIn">
 	<div>Enter your call sign</div>
+	<form action="/home/battle" method="post">
+		<input type="text" name="userName" id="userName" value="" placeholder="Your name"/>
+		<button type="submit" value="" >Join the Fight</button>
+	</form>
+</div>
 	
-	<div>
-		<form action="/home/battle" method="post">
-			<input type="text" name="userName" id="userName" value=""/>
-			<button type="submit" value="">Join the Fight</button>
-		</form>
-	</div>
-	
-	
-
-
-
+<%=image_tag("intro.jpg", :class=>'intro', :alt=>'Battle of Yorktown')=%>

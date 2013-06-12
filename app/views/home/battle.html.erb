@@ -6,37 +6,39 @@
 	<form action="/home/index">
 		<button type="submit" >New Player</button>
 	</form>
-		<form action="/home/end">
+		<form action="/home/end" method="post">
 		<input type="hidden" name="userName" id="userName" value="<%= @userName%>"/>
 		<button type="submit" >End game</button>
 	</form>
 </div>
-<div id="playingField">
-	
 
-	<div id="dealerSpace">
-		<h2 id="dealerText">Let the Battle Begin!</h2>
-	</div>
-	
+
+<div id="playingField">
+
 	<div id="playerSpace">
 		<h1>The Amazing <%= @userName%></h1>
-		<div class="deckCount">Deck Size :<span id="playerDeckCount">26</span></div>
-		<img src="/assets/blue_deck.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/>
+		<div class="deck" id="playerDeck">
+			<div class="deckText">Deck Size :<span id="playerDeckCount" class="deckCount">26</span></div>
+			<img src="/assets/blue_deck.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/>
+		</div>
 		<div id="playerCardSpace" class="cardText"></div>
 
 	</div>
 	
+	<div id="actionSpace">
+		<h2 id="dealerText">Versus</h2>
+		<button type="button" onClick="playHand()" id="actionButton">Draw</button>
+	</div>
+	
 	<div id="enemySpace">
 		<h1>Cobra Commander</h1>
-		<div class="deckCount">Deck Size: <span id="enemyDeckCount">26</span></div>
-		<img src="/assets/red_deck.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/>
+		<div class="deck" id="enemyDeck">
+			<div class="deckText">Deck Size: <span id="enemyDeckCount" class="deckCount">26</span></div>
+			<img src="/assets/red_deck.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/><img src="/assets/deck_right.png"/>
+		</div>
 		<div id="enemyCardSpace" class="cardText"></div>
 	</div>
 	
-	<div id="actionSpace">
-		<button type="button" onClick="playHand()" id="actionButton">Draw</button>
-	</div>
-
 </div>
 	
 	
