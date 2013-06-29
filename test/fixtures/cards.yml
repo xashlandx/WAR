@@ -4,8 +4,47 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+#one: {}
 # column: value
 #
-two: {}
+#two: {}
 #  column: value
+
+
+#create test cards
+
+1:
+   value: 2
+   name: "Two" 
+   suit: "Hearts"
+   image: "51.png"
+  
+2:
+   value: 3
+   name: "Two" 
+   suit: "Hearts"
+   image: "51.png"	
+
+3:
+   value: 6
+   name: "Two" 
+   suit: "Hearts"
+   image: "51.png"	  
+ 
+4:
+   value: 5
+   name: "Two" 
+   suit: "Hearts"
+   image: "51.png"
+  
+5:
+   value: 3
+   name: "Two" 
+   suit: "Diamonds"
+   image: "51.png"	
+
+6:
+   value: 4
+   name: "Two" 
+   suit: "Spades"
+   image: "51.png"	
